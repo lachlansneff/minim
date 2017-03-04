@@ -24,7 +24,7 @@ pub struct Runtime {
 impl Runtime {
     pub fn new() -> Runtime {
         Runtime {
-            values: vec![0; 100],
+            values: vec![],
             program: vec![],
             labels: HashMap::new(),
             instruction_pointer: 0,
@@ -92,8 +92,7 @@ impl Runtime {
         self.runtime_values.current_index = cell_index as u32;
         let v = self.get_value(Box::new(value));
         if cell_index >= self.values.len() {
-            // expand values
-            self.values.reserve(cell_index);
+            self.values.reserve(cell_index*2);
         }
         let ret = self.values.insert(cell_index, v);
         self.runtime_values.last_modified = cell_index as u32;
@@ -158,6 +157,7 @@ impl Runtime {
         let m = *mem;
         match m {
             MemAccess::Index(i) => self.values[i as usize],
+            MemAccess::CellNum(i) => i as i64,
             MemAccess::Cell(a) => self.get_mem_value(a),
         }
     }

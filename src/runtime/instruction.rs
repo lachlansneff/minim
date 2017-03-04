@@ -2,6 +2,7 @@
 #[derive(Clone)]
 pub enum MemAccess {
     Index(u32),
+    CellNum(u32),
     Cell(Box<MemAccess>),
 }
 
