@@ -1,0 +1,6 @@
+[package]
+name = "minim"
+version = "0.1.0"
+authors = ["ScorchSecurity <mtsneffels13@gmail.com>"]
+
+[dependencies]
